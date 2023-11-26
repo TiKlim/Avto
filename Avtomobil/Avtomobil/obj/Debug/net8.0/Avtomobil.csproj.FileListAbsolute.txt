@@ -1,0 +1,14 @@
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\bin\Debug\net8.0\Avtomobil.exe
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\bin\Debug\net8.0\Avtomobil.deps.json
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\bin\Debug\net8.0\Avtomobil.runtimeconfig.json
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\bin\Debug\net8.0\Avtomobil.dll
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\bin\Debug\net8.0\Avtomobil.pdb
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.AssemblyInfoInputs.cache
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.AssemblyInfo.cs
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.csproj.CoreCompileInputs.cache
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.dll
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\refint\Avtomobil.dll
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.pdb
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\Avtomobil.genruntimeconfig.cache
+C:\Users\Клим\source\repos\Avtomobil\Avtomobil\obj\Debug\net8.0\ref\Avtomobil.dll
