@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 
-namespace ConsoleApp4
+namespace Avtomobil
 {
     internal class Program
     {
@@ -13,7 +13,7 @@ namespace ConsoleApp4
             Console.WriteLine("> Доброго времени суток.");
             while (true)
             {
-                Console.WriteLine("> Общее меню:\n1 - Создать новый объект; 2 - Выбрать существующий объект.");
+                Console.WriteLine("> Общее меню:\n1 - Выбрать новый автомобиль; 2 - Выбрать обкатанный автомобиль.");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 string? vybor1 = Console.ReadLine();
                 Console.ForegroundColor = ConsoleColor.White;
@@ -32,8 +32,6 @@ namespace ConsoleApp4
                         if (s == a.Nom)
                         {
                             car = a;
-                            car.Out();
-                            car.Ezda();
                             car.Menu();
                         }
                     }
@@ -42,4 +40,3 @@ namespace ConsoleApp4
         }
     }
 }
-
