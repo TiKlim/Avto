@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace Avtomobil
 {
@@ -21,11 +22,13 @@ namespace Avtomobil
         private int koordinataXb; //Координата X
         private int koordinataYb; //Координата Y
         private double dist; //Дистанция
+        private List<string> coordinates = new List<string>();
+        private List<Avto> cars = new List<Avto>();
         private Avto pas;
         public string? Nom { get { return nom; } }
-        public Avto() { Menu(); }
+        public Avto() { Menu(cars); }
 
-        private void Info() //Информация об автомобиле
+        private void Info(List<Avto> cars) //Информация об автомобиле
         {
             Console.WriteLine("Номер машины (А000АА):");
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -41,7 +44,7 @@ namespace Avtomobil
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Ваш расход топлива катастрофически велик!");
                 Console.ForegroundColor = ConsoleColor.White;
-                Info();
+                Info(cars);
             }
             this.speed = 0;
             this.top = 0;
@@ -51,9 +54,8 @@ namespace Avtomobil
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Данные сохранены.");
             Console.ForegroundColor = ConsoleColor.White;
-            Menu();
         }
-        private void Info2()
+        private void Info2(List<Avto> cars)
         {
             Console.WriteLine("'Моя поездка'");
             Console.WriteLine("Введите координаты Вашего путешествия:");
@@ -72,40 +74,39 @@ namespace Avtomobil
             Console.WriteLine("Данные сохранены.");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Ваша цель поездки: {dist}. Счастливого пути!");
-            Menu();
+            Menu2(cars);
         }
-        private void Stop() //Торможение
+        private void Stop(List<Avto> cars) //Торможение
         {
             speed = 0;
             rasst = 0;
             Out();
-            Ezda();
-            Menu();
+            Ezda(cars);
+            Menu2(cars);
         }
-        private void Razgon() //Разгон
+        private void Razgon(List<Avto> cars) //Разгон
         {
-            if (top >= 10)
+            if (top >= 10) //Если уровент топлива больше или равен 10, то мы разгоняемся каждый раз + 10 км/ч
             {
                 speed += 10;
                 Out();
-                Ezda();
-                Avaria(pas);
-                Menu();
+                Ezda(cars);
+                Menu2(cars);
             }
             else if (top <= 10)
             {
                 Console.WriteLine("! Бак пуст !");
                 Console.WriteLine($"! Требуется заправка !");
-                Menu();
+                Menu2(cars);
             }
             else if (top == 0)
             {
                 Console.WriteLine("! Бак пуст !");
                 Console.WriteLine($"! Требуется заправка !");
-                Menu();
+                Menu2(cars);
             }
         }
-        private double Zapravka() //Заправка
+        private double Zapravka(List<Avto> cars) //Заправка
         {
             Console.WriteLine($"Сколько литров Вы бы хотели заправить в бак? (ОБЪЁМ ВАШЕГО БАКА: {bak}, СЕЙЧАС УРОВЕНЬ ТОПЛИВА: {top}).");
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -117,92 +118,116 @@ namespace Avtomobil
                 top += zap;
                 Console.WriteLine($"Бак заправлен. Сейчас: {top} литров.");
                 speed += 10;
-                Menu();
+                Menu2(cars);
             }
             else
             {
                 Console.WriteLine("! Бак полон !");
-                Menu();
+                Menu2(cars);
             }
             return top;
         }
-        private void Ezda() //Вводим новую переменную расстояние "S"
+        private void Ezda(List<Avto> cars) //Вводим новую переменную расстояние "S"
         {
-            if (speed > 0)
+            if (speed > 0) //Если машина в принципе поехала
             {
-                if (top >= 10)
+                if (top >= 10) //Если уровень топлива больше или равен 10
                 {
                     top -= ras;
                     probeg += 100;
                     rasst += 100;
                 }
-                else if (top <= 10)
+                else if (top <= 10) //Если уровень топлива меньше или равен 10
                 {
                     Console.WriteLine("! Бак пуст !");
                     Console.WriteLine($"! Требуется заправка !");
                 }
-                else if (top == 0)
+                else if (top == 0) //Если уровент топлива вовсе на нуле
                 {
                     top = 0;
                     probeg = 0;
                     rasst = 0;
                 }
             }
-            if (rasst >= dist)
+            if (rasst >= dist) //Для цели поездки
             {
                 rasst = 0;
+                speed = 0;
                 Console.WriteLine("Ура! Вы преодолели свою цель поездки!");
                 Console.WriteLine("Хотите задать ещё одну? Обратитесь в соответствующую вкладку меню.");
-                Menu();
+                Menu2(cars);
             }
-            double kilometragh = (top / ras) * 100; //На сколько километров хватит бензина
+            Avaria(cars);
+            kilometragh = (top / ras) * 100; //На сколько километров хватит бензина
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine("Пройдено:     Пробег:      Остаток топлива:      Километраж при текущем уровне бензина в баке: ");
             Console.WriteLine($"\n{rasst}             {probeg}            {top}                     {kilometragh}");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine($"Ваша цель поездки: {dist} километров.");
-            Menu();
+            Menu2(cars);
         }
         private void Out()
         {
             Console.WriteLine($"Номер авто: {nom} \nОбъём бака: {bak} \nУровень топлива сейчас: {top} \nРасход топлива (на 100 км): {ras} \nВаша скорость: {speed}");
         }
-        public void Menu()
+        public void Menu(List<Avto> cars)
         {
-            Console.WriteLine("> Бортовое меню:\n1 - Внести информацию по машине; 2 - Изменить Вашу цель поездки; 3 - Разогнаться; 4 - Тормозить; 5 - Заправиться; 6 - Выход в меню автомобилей.");
+            Console.WriteLine("> Бортовое меню:\n1 - Внести информацию по машине; 2 - Выход в меню автомобилей.");
             Console.ForegroundColor = ConsoleColor.Cyan;
             string? vybor2 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
             switch (vybor2)
             {
                 case "1":
-                    Info();
+                    Info(cars);
                     break;
                 case "2":
-                    Info2();
-                    break;
-                case "3":
-                    Razgon();
-                    break;
-                case "4":
-                    Stop();
-                    break;
-                case "5":
-                    Zapravka();
-                    break;
-                case "6":
                     Console.WriteLine("");
                     break;
             }
         }
-        private void Avaria(Avto pas)
+        public void Menu2(List<Avto> cars)
         {
-            if ((pas.koordinataXa == koordinataXa && pas.koordinataYa == koordinataYa) && (pas.koordinataXb == koordinataXb && pas.koordinataYb == koordinataYb))
+            Console.WriteLine("> Бортовое меню:\n1 - Изменить Вашу цель поездки; 2 - Разогнаться; 3 - Тормозить; 4 - Заправиться; 5 - Выход в меню автомобилей.");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            string? vybor2 = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            switch (vybor2)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("! АВАРИЯ !");
-                Console.ForegroundColor = ConsoleColor.White;
-            }            
+                case "1":
+                    Info2(cars);
+                    break;
+                case "2":
+                    Razgon(cars);
+                    break;
+                case "3":
+                    Stop(cars);
+                    break;
+                case "4":
+                    Zapravka(cars);
+                    break;
+                case "5":
+                    Console.WriteLine("");
+                    break;
+            }
+        }
+        private void Avaria(List<Avto> cars)
+        {
+            for (int i = 0; i < cars.Count; i++)
+            {
+                for (int j = 0; j < cars.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        if ((cars[i].koordinataXa == cars[j].koordinataXa && cars[i].koordinataXb == cars[j].koordinataXb) && (cars[i].koordinataYa == cars[j].koordinataYa && cars[i].koordinataYb == cars[j].koordinataYb))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("! АВАРИЯ !");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+                }
+            }
         }
     }
 }

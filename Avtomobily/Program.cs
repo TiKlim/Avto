@@ -1,6 +1,7 @@
 ﻿using Avtomobil;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Avtomobil
 {
@@ -32,7 +33,7 @@ namespace Avtomobil
                         if (s == a.Nom)
                         {
                             car = a;
-                            car.Menu();
+                            car.Menu2(cars);
                         }
                     }
                 }
