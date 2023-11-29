@@ -67,7 +67,7 @@ namespace Avtomobil
             this.koordinataXb = Convert.ToInt32(Console.ReadLine());
             this.koordinataYb = Convert.ToInt32(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.White;
-            this.dist = Math.Round(Math.Sqrt(((koordinataXa + koordinataXb) * 2) + ((koordinataYa + koordinataYb) * 2)));
+            this.dist = Math.Round(Math.Sqrt(((koordinataXb - koordinataXa) * (koordinataXb - koordinataXa)) + ((koordinataYb - koordinataYa) * (koordinataYb - koordinataYa))));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Данные сохранены.");
             Console.ForegroundColor = ConsoleColor.White;
@@ -93,14 +93,28 @@ namespace Avtomobil
             }
             else if (top <= 10)
             {
-                Console.WriteLine("! Бак пуст !");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("! Бак пустеет !");
                 Console.WriteLine($"! Требуется заправка !");
-                Menu2(cars);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Заправиться? (да/нет)");
+                string? zap = Console.ReadLine();
+                switch (zap)
+                {
+                    case "да":
+                        Zapravka(cars);
+                        break;
+                    case "нет":
+                        Stop(cars);
+                        break;
+                }
             }
             else if (top == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("! Бак пуст !");
                 Console.WriteLine($"! Требуется заправка !");
+                Console.ForegroundColor = ConsoleColor.White;
                 Menu2(cars);
             }
         }
@@ -120,7 +134,9 @@ namespace Avtomobil
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("! Бак полон !");
+                Console.ForegroundColor = ConsoleColor.White;
                 Menu2(cars);
             }
             return top;
@@ -137,8 +153,21 @@ namespace Avtomobil
                 }
                 else if (top <= 10) //Если уровень топлива меньше или равен 10
                 {
-                    Console.WriteLine("! Бак пуст !");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("! Бак пустеет !");
                     Console.WriteLine($"! Требуется заправка !");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Заправиться? (да/нет)");
+                    string? zap = Console.ReadLine();
+                    switch (zap)
+                    {
+                        case "да":
+                            Zapravka(cars);
+                            break;
+                        case "нет":
+                            Stop(cars); 
+                            break;
+                    }
                 }
                 else if (top == 0) //Если уровент топлива вовсе на нуле
                 {
