@@ -211,15 +211,15 @@ namespace Avtomobil
                     break;
             }
         }
-        private void Avaria(List<Avto> cars)
+        private void Avaria(List<Avto> cars) //Авария
         {
-            for (int i = 0; i < cars.Count; i++)
+            for (int i = 0; i < cars.Count; i++) //Для одного участника движения ...
             {
-                for (int j = 0; j < cars.Count; j++)
+                for (int j = 0; j < cars.Count; j++) //...и для другого
                 {
                     if (i != j)
                     {
-                        if ((cars[i].koordinataXa == cars[j].koordinataXa && cars[i].koordinataXb == cars[j].koordinataXb) && (cars[i].koordinataYa == cars[j].koordinataYa && cars[i].koordinataYb == cars[j].koordinataYb))
+                        if ((cars[i].koordinataXa == cars[j].koordinataXa && cars[i].koordinataXb == cars[j].koordinataXb) && (cars[i].koordinataYa == cars[j].koordinataYa && cars[i].koordinataYb == cars[j].koordinataYb)) //Если начальные и конечные координаты обоих совпадают, то авария
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("! АВАРИЯ !");
