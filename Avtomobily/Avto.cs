@@ -22,9 +22,7 @@ namespace Avtomobil
         private int koordinataXb; //Координата X
         private int koordinataYb; //Координата Y
         private double dist; //Дистанция
-        private List<string> coordinates = new List<string>();
         private List<Avto> cars = new List<Avto>();
-        private Avto pas;
         public string? Nom { get { return nom; } }
         public Avto() { Menu(cars); }
 
