@@ -84,14 +84,14 @@ namespace Avtomobil
         }
         private void Razgon(List<Avto> cars) //Разгон
         {
-            if (top >= 10) //Если уровент топлива больше или равен 10, то мы разгоняемся каждый раз + 10 км/ч
+            if (top >= 15) //Если уровент топлива больше или равен 10, то мы разгоняемся каждый раз + 10 км/ч
             {
                 speed += 10;
                 Out();
                 Ezda(cars);
                 Menu2(cars);
             }
-            else if (top <= 10)
+            else if (top <= 15)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("! Бак пустеет !");
@@ -109,8 +109,11 @@ namespace Avtomobil
                         break;
                 }
             }
-            else if (top == 0)
+            else if (top < 0)
             {
+                top = 0;
+                probeg -= kilometragh;
+                rasst -= kilometragh;        
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("! Бак пуст !");
                 Console.WriteLine($"! Требуется заправка !");
@@ -145,13 +148,13 @@ namespace Avtomobil
         {
             if (speed > 0) //Если машина в принципе поехала
             {
-                if (top >= 10) //Если уровень топлива больше или равен 10
+                if (top >= 15) //Если уровень топлива больше или равен 10
                 {
                     top -= ras;
                     probeg += 100;
                     rasst += 100;
                 }
-                else if (top <= 10) //Если уровень топлива меньше или равен 10
+                else if (top <= 15) //Если уровень топлива меньше или равен 10
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("! Бак пустеет !");
@@ -185,7 +188,7 @@ namespace Avtomobil
                 Menu2(cars);
             }
             Avaria(cars);
-            kilometragh = (top / ras) * 100; //На сколько километров хватит бензина
+            kilometragh = Math.Round((top / ras) * 100); //На сколько километров хватит бензина
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine("Пройдено:     Пробег:      Остаток топлива:      Километраж при текущем уровне бензина в баке: ");
             Console.WriteLine($"\n{rasst}             {probeg}            {top}                     {kilometragh}");
@@ -195,7 +198,7 @@ namespace Avtomobil
         }
         private void Out()
         {
-            Console.WriteLine($"Номер авто: {nom} \nОбъём бака: {bak} \nУровень топлива сейчас: {top} \nРасход топлива (на 100 км): {ras} \nВаша скорость: {speed}");
+            Console.WriteLine($"Номер авто: {nom} \nОбъём бака: {bak} \nРасход топлива (на 100 км): {ras} \nВаша скорость: {speed}");
         }
         public void Menu(List<Avto> cars)
         {
