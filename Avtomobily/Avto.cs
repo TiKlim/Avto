@@ -93,8 +93,8 @@ namespace Avtomobil
             }
             else if (top == 0)
             {
-                top = 0;
-                probeg = 0;
+                //top = 0;
+                //probeg = 0;
                 rasst = 0;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("! Бак пуст !");
@@ -125,6 +125,7 @@ namespace Avtomobil
                 top += zap;
                 Console.WriteLine($"Бак заправлен. Сейчас: {top} литров.");
                 speed += 10;
+                //rasst = 0;
                 Menu2(cars);
             }
             else
@@ -142,7 +143,7 @@ namespace Avtomobil
             {
                 top = 0;
                 probeg += kilometragh;
-                rasst = 0;
+                rasst += kilometragh;
             }
             if (speed > 0) //Если машина в принципе поехала
             {
@@ -154,8 +155,8 @@ namespace Avtomobil
                 }
                 else if (top == 0) 
                 {
-                    top = 0;
-                    probeg = 0;
+                    //top = 0;
+                    //probeg = 0;
                     rasst = 0;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("! Бак пуст !");
@@ -174,11 +175,16 @@ namespace Avtomobil
                     }
                 }                
             }
-            if (rasst >= dist) //Для цели поездки
+            if (rasst >= dist || rasst >= probeg + dist) //Для цели поездки
             {
-                rasst = 0;
+                probeg = dist;
+                top = 0;
+                probeg += kilometragh;
+                rasst += kilometragh;
                 speed = 0;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Ура! Вы преодолели свою цель поездки!");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Хотите задать ещё одну? Обратитесь в соответствующую вкладку меню.");
                 Menu2(cars);
             }
@@ -189,7 +195,7 @@ namespace Avtomobil
             Console.WriteLine($"\n{rasst}             {probeg}            {top}                     {kilometragh}");
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine($"Ваша цель поездки: {dist} километров.");
-            if (top == 0 & rasst == 0)
+            if (top == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("! Бак пуст !");
