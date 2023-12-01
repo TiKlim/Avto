@@ -225,7 +225,7 @@ namespace Avtomobil
                     Menu2(cars);
                 }
             }
-            if (top <= ras && rasst < dist)
+            if (top < 2 && rasst < dist)
             {
                 top = 0;
                 probeg += kilometragh;
@@ -263,7 +263,7 @@ namespace Avtomobil
         }
         private void Out()
         {
-            if (top <= ras)
+            if (top < 2)
             {
                 speed = 0;
             }
