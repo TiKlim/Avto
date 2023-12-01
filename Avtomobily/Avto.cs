@@ -228,8 +228,8 @@ namespace Avtomobil
             if (top < 2 && rasst < dist)
             {
                 top = 0;
-                probeg += kilometragh;
-                rasst += kilometragh;
+                probeg += kilometragh - 100;
+                rasst += kilometragh - 100;
             }
             Avaria(cars);
             kilometragh = Math.Round((top / ras) * 100); //На сколько километров хватит бензина
