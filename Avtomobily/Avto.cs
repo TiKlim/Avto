@@ -169,11 +169,19 @@ namespace Avtomobil
         {          
             if (speed > 0) //Если машина в принципе поехала
             {
-                if (top >= 0) 
+                if (top > 0) 
                 {
                     top -= ras;
                     probeg += 100;
                     rasst += 100;
+                }
+                else if ((top - ras) < 0)
+                {
+                    probeg -= 100;
+                    rasst -= 100;
+                    probeg += kilometragh;
+                    rasst += kilometragh;
+                    top = 0;
                 }
                 else if (top == 0) 
                 {
@@ -210,10 +218,11 @@ namespace Avtomobil
                 Menu2(cars);
             }
             if (top < 2 && rasst < dist)
-            {
+            {               
+                probeg += kilometragh - 100;
+                rasst += kilometragh - 100;
                 top = 0;
-                probeg += kilometragh;
-                rasst += kilometragh;
+                speed = 0;
             }
             Avaria(cars);
             kilometragh = Math.Round((top / ras) * 100); //На сколько километров хватит бензина
