@@ -9,7 +9,7 @@ namespace Avtomobil
     {
         static void Main(string[] args)
         {
-            List<Avto> cars = new List<Avto>();
+             List<Avto> cars = new List<Avto>();
             Avto car;
             Console.WriteLine("> Доброго времени суток.");
             while (true)
