@@ -55,6 +55,7 @@ namespace Avtomobil
         }
         private void Info2(List<Avto> cars)
         {
+            speed = 0; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             Console.WriteLine("'Моя поездка'");
             Console.WriteLine("Введите координаты Вашего путешествия:");
             Console.WriteLine("Начало пути: ");
@@ -175,7 +176,7 @@ namespace Avtomobil
                     probeg += 100;
                     rasst += 100;
                 }
-                else if ((top - ras) < 0)
+                else if ((top - ras) < 0 & speed > 0) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 {
                     probeg -= 100;
                     rasst -= 100;
@@ -207,7 +208,7 @@ namespace Avtomobil
             {
                 double v = dist - (rasst - 100);
                 top = (v * ras) / 100;
-                probeg += v;
+                probeg += v - 100; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 speed = 0;
                 dist = 0;
                 rasst = 0;
@@ -217,7 +218,7 @@ namespace Avtomobil
                 Console.WriteLine("Хотите задать ещё одну? Обратитесь в соответствующую вкладку меню.");
                 Menu2(cars);
             }
-            if (top < 2 && rasst < dist)
+            if (top < 2 && rasst < dist && rasst != 0) //!!!!!!!!!!!!!!!!!!!!!!!!!!!
             {               
                 probeg += kilometragh - 100;
                 rasst += kilometragh - 100;
