@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\prdb\\Klim\\Avtomobily\\Avtomobil.csproj",
+      "projectUniqueName": "C:\\Users\\prdb\\Desktop\\Avto-main\\Avtomobily\\Avtomobil.csproj",
       "projectName": "Avtomobil",
-      "projectPath": "C:\\Users\\prdb\\Klim\\Avtomobily\\Avtomobil.csproj",
+      "projectPath": "C:\\Users\\prdb\\Desktop\\Avto-main\\Avtomobily\\Avtomobil.csproj",
       "packagesPath": "C:\\Users\\prdb\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\prdb\\Klim\\Avtomobily\\obj\\",
+      "outputPath": "C:\\Users\\prdb\\Desktop\\Avto-main\\Avtomobily\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,9 +32,7 @@
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\prdb\\Desktop": {},
-        "C:\\Users\\prdb\\nuget": {},
+        "C:\\Users\\prdb\\Desktop\\nuget-repo": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

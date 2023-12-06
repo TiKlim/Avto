@@ -111,7 +111,9 @@ namespace Avtomobil
                     Console.WriteLine($"! Требуется заправка !");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Заправиться? (да/нет)");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     string? zap = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
                     switch (zap)
                     {
                         case "да":
@@ -128,7 +130,9 @@ namespace Avtomobil
                     Console.WriteLine($"! Требуется заправка !");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Заправиться? (да/нет)");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     string? zap = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
                     switch (zap)
                     {
                         case "да":
@@ -162,11 +166,11 @@ namespace Avtomobil
             }
             return top;
         }
-        private void Ezda(List<Avto> cars) 
-        {          
+        private void Ezda(List<Avto> cars)
+        {
             if (speed > 0) //Если машина в принципе поехала
             {
-                if (top > 0) 
+                if (top > 0)
                 {
                     top -= ras;
                     probeg += 100;
@@ -180,7 +184,7 @@ namespace Avtomobil
                     rasst += kilometragh;
                     top = 0;
                 }
-                else if (top == 0) 
+                else if (top == 0)
                 {
                     rasst = 0;
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -188,7 +192,9 @@ namespace Avtomobil
                     Console.WriteLine($"! Требуется заправка !");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("Заправиться? (да/нет)");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     string? zap = Console.ReadLine();
+                    Console.ForegroundColor = ConsoleColor.White;
                     switch (zap)
                     {
                         case "да":
@@ -196,8 +202,8 @@ namespace Avtomobil
                         case "нет":
                             Stop(cars); break;
                     }
-                }                
-            }           
+                }
+            }
             if (rasst >= dist & dist != 0) //Для цели поездки
             {
                 double v = dist - (rasst - 100);
@@ -213,7 +219,7 @@ namespace Avtomobil
                 Menu2(cars);
             }
             if (top < 2 && rasst < dist && rasst != 0)
-            {               
+            {
                 probeg += kilometragh - 100;
                 rasst += kilometragh - 100;
                 top = 0;
@@ -232,7 +238,9 @@ namespace Avtomobil
                 Console.WriteLine($"! Требуется заправка !");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Заправиться? (да/нет)");
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 string? zap = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
                 switch (zap)
                 {
                     case "да":
@@ -329,26 +337,38 @@ namespace Avtomobil
             else if (cars.Count > 1)
             {
                 Random random = new Random();
-                var arandomdom = random.Next(0, cars.Count);
-            }
-            for (int i = 0; i < cars.Count; i++) //Для одного участника движения ...
-            {
-                for (int j = 0; j < cars.Count; j++) //...и для другого
+                var domdom1 = random.Next(0, cars.Count);
+                var domdom2 = random.Next(0, cars.Count);
+
+                for (int i = 0; i < cars.Count; i++) //Для одного участника движения ...
                 {
-                    if (i != j)
+                    for (int j = 0; j < cars.Count; j++) //...и для другого
                     {
-                        if ((cars[i].koordinataXa == cars[j].koordinataXa && cars[i].koordinataXb == cars[j].koordinataXb) && (cars[i].koordinataYa == cars[j].koordinataYa && cars[i].koordinataYb == cars[j].koordinataYb)) //Если начальные и конечные координаты обоих совпадают, то авария
+                        if (i != j)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("! АВАРИЯ !");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            cars[i].speed = 0;
-                            cars[j].speed = 0;
-                            cars[i].rasst = 0;
-                            cars[j].rasst = 0;
-                            cars[i].dist = 0;
-                            cars[j].dist = 0;
-                            Console.WriteLine($"Ваш автомобиль ({cars[i]}) сопрекоснулся с автомобилем ({cars[j]})");
+                            if ((cars[i].koordinataXa == cars[j].koordinataXa && cars[i].koordinataXb == cars[j].koordinataXb) && (cars[i].koordinataYa == cars[j].koordinataYa && cars[i].koordinataYb == cars[j].koordinataYb)) //Если начальные и конечные координаты обоих совпадают, то авария
+                            {
+                                cars[i] = cars[domdom1];
+                                cars[j] = cars[domdom2];
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("! АВАРИЯ !");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                cars[i].speed = 0;
+                                cars[j].speed = 0;
+                                cars[i].rasst = 0;
+                                cars[j].rasst = 0;
+                                cars[i].dist = 0;
+                                cars[j].dist = 0;
+                                Console.WriteLine("Aвтомобиль сопрекоснулся с другим автомобилем.");
+                                Console.WriteLine("");
+                                Menu2(cars);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Аварии не случилось.");
+                                Console.WriteLine("");
+                                Menu2(cars);
+                            }
                         }
                     }
                 }
