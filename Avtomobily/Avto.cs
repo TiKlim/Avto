@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
@@ -26,7 +27,6 @@ namespace Avtomobil
         private List<Avto> cars = new List<Avto>();
         public string? Nom { get { return nom; } }
         public Avto() { Menu(cars); }
-
         private void Info(List<Avto> cars) //Информация об автомобиле
         {
             Console.WriteLine("Номер машины (А000АА):");
@@ -219,7 +219,6 @@ namespace Avtomobil
                 top = 0;
                 speed = 0;
             }
-            Avaria(cars);
             kilometragh = Math.Round((top / ras) * 100); //На сколько километров хватит бензина
             Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
             Console.WriteLine("Пройдено:     Пробег:      Остаток топлива:      Километраж при текущем уровне бензина в баке:    Скорость:");
@@ -271,7 +270,7 @@ namespace Avtomobil
         }
         private void Menu2(List<Avto> cars)
         {
-            Console.WriteLine("> Бортовое меню:\n1 - Изменить Вашу цель поездки; 2 - Разогнаться; 3 - Тормозить; 4 - Заправиться; 5 - Выход в меню автомобилей.");
+            Console.WriteLine("> Бортовое меню:\n1 - Изменить Вашу цель поездки; 2 - Разогнаться; 3 - Тормозить; 4 - Заправиться; 5 - Выход в меню автомобилей; 6 - Авария.");
             Console.ForegroundColor = ConsoleColor.Cyan;
             string? vybor2 = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -287,6 +286,8 @@ namespace Avtomobil
                     Zapravka(cars); break;
                 case "5":
                     Menu3(cars); break;
+                case "6":
+                    Avaria(cars); break;
             }
         }
         public static void Menu3(List<Avto> cars)
@@ -319,9 +320,17 @@ namespace Avtomobil
                 }
             }
         }
-
         private void Avaria(List<Avto> cars) //Авария
         {
+            if (cars.Count == 1)
+            {
+                Console.WriteLine("Аварии не случилось. Ваша машина единственная на трассе) ");
+            }
+            else if (cars.Count > 1)
+            {
+                Random random = new Random();
+                var arandomdom = random.Next(0, cars.Count);
+            }
             for (int i = 0; i < cars.Count; i++) //Для одного участника движения ...
             {
                 for (int j = 0; j < cars.Count; j++) //...и для другого
@@ -339,7 +348,7 @@ namespace Avtomobil
                             cars[j].rasst = 0;
                             cars[i].dist = 0;
                             cars[j].dist = 0;
-                            Console.ReadLine();
+                            Console.WriteLine($"Ваш автомобиль ({cars[i]}) сопрекоснулся с автомобилем ({cars[j]})");
                         }
                     }
                 }
