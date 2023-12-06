@@ -9,10 +9,11 @@ namespace Avtomobil
     {
         static void Main(string[] args)
         {
-             List<Avto> cars = new List<Avto>();
-            Avto car;
+            List<Avto> cars = new List<Avto>();
+            //Avto car;
             Console.WriteLine("> Доброго времени суток.");
-            while (true)
+            Avto.Menu3(cars);
+            /*while (true)
             {
                 Console.WriteLine("> Общее меню:\n1 - Выбрать новый автомобиль; 2 - Выбрать обкатанный автомобиль.");
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -37,7 +38,7 @@ namespace Avtomobil
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

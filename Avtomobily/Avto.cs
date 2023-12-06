@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
@@ -55,7 +56,7 @@ namespace Avtomobil
         }
         private void Info2(List<Avto> cars)
         {
-            speed = 0; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            speed = 0;
             Console.WriteLine("'Моя поездка'");
             Console.WriteLine("Введите координаты Вашего путешествия:");
             Console.WriteLine("Начало пути: ");
@@ -104,8 +105,6 @@ namespace Avtomobil
                 }
                 else if (top == 0)
                 {
-                    //top = 0;
-                    //probeg = 0;
                     rasst = 0;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("!      Бак пуст      !");
@@ -123,8 +122,6 @@ namespace Avtomobil
                 }
                 else if (top < 0)
                 {
-                    //top = 0;
-                    //probeg = 0;
                     rasst = 0;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("!      Бак пуст      !");
@@ -154,7 +151,6 @@ namespace Avtomobil
                 top += zap;
                 Console.WriteLine($"Бак заправлен. Сейчас: {top} литров.");
                 speed += 10;
-                //rasst = 0;
                 Menu2(cars);
             }
             else
@@ -176,7 +172,7 @@ namespace Avtomobil
                     probeg += 100;
                     rasst += 100;
                 }
-                else if ((top - ras) < 0 & speed > 0) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                else if ((top - ras) < 0 & speed > 0)
                 {
                     probeg -= 100;
                     rasst -= 100;
@@ -186,8 +182,6 @@ namespace Avtomobil
                 }
                 else if (top == 0) 
                 {
-                    //top = 0;
-                    //probeg = 0;
                     rasst = 0;
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("!      Бак пуст      !");
@@ -208,7 +202,7 @@ namespace Avtomobil
             {
                 double v = dist - (rasst - 100);
                 top = (v * ras) / 100;
-                probeg += v - 100; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                probeg += v - 100;
                 speed = 0;
                 dist = 0;
                 rasst = 0;
@@ -218,7 +212,7 @@ namespace Avtomobil
                 Console.WriteLine("Хотите задать ещё одну? Обратитесь в соответствующую вкладку меню.");
                 Menu2(cars);
             }
-            if (top < 2 && rasst < dist && rasst != 0) //!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (top < 2 && rasst < dist && rasst != 0)
             {               
                 probeg += kilometragh - 100;
                 rasst += kilometragh - 100;
@@ -261,7 +255,7 @@ namespace Avtomobil
             }
             Console.WriteLine($"Номер авто: {nom} \nОбъём бака: {bak} \nРасход топлива (на 100 км): {ras}");
         }
-        public void Menu(List<Avto> cars)
+        private void Menu(List<Avto> cars)
         {
             Console.WriteLine("> Бортовое меню:\n1 - Внести информацию по машине; 2 - Выход в меню автомобилей.");
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -272,10 +266,10 @@ namespace Avtomobil
                 case "1":
                     Info(cars); break;
                 case "2":
-                    Console.WriteLine(""); break;
+                    Menu3(cars); break;
             }
         }
-        public void Menu2(List<Avto> cars)
+        private void Menu2(List<Avto> cars)
         {
             Console.WriteLine("> Бортовое меню:\n1 - Изменить Вашу цель поездки; 2 - Разогнаться; 3 - Тормозить; 4 - Заправиться; 5 - Выход в меню автомобилей.");
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -292,9 +286,40 @@ namespace Avtomobil
                 case "4":
                     Zapravka(cars); break;
                 case "5":
-                    Console.WriteLine(""); break;
+                    Menu3(cars); break;
             }
         }
+        public static void Menu3(List<Avto> cars)
+        {
+            Avto car;
+            while (true)
+            {
+                Console.WriteLine("> Общее меню:\n1 - Выбрать новый автомобиль; 2 - Выбрать обкатанный автомобиль.");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string? vybor1 = Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                if (vybor1 == "1")
+                {
+                    cars.Add(new Avto());
+                }
+                else if (vybor1 == "2")
+                {
+                    foreach (Avto a in cars)
+                    {
+                        Console.WriteLine("Введите номер автомобиля: ");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        string? s = Console.ReadLine();
+                        Console.ForegroundColor = ConsoleColor.White;
+                        if (s == a.Nom)
+                        {
+                            car = a;
+                            car.Menu2(cars);
+                        }
+                    }
+                }
+            }
+        }
+
         private void Avaria(List<Avto> cars) //Авария
         {
             for (int i = 0; i < cars.Count; i++) //Для одного участника движения ...
